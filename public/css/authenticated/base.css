@@ -1,0 +1,120 @@
+body {
+    background: #dfdfdf;
+    color: #333;
+}
+
+/* Navbar */
+
+.navbar {
+    background: #314453;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    padding: 0 !important;
+    z-index: 1025 !important;
+}
+
+.navbar .navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: #fff;
+}
+
+.navbar .navbar-brand img {
+    height: 70px;
+}
+
+.navbar .navbar-collapse {
+    color: #fff;
+    font-size: 1.5rem;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+ ul {
+    font-size: 1rem !important;
+    font-weight: bold;
+    margin-right: 60px;
+}
+
+.dropdown-menu {
+    left: -70px !important;
+    padding: 0 !important;
+}
+
+.dropdown-item {
+    padding: 1rem !important;
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+    border-bottom: 2px solid #e9ecef;
+    width: 200px !important;
+}
+
+.dropdown-item i {
+    padding-top: 5px;
+}
+
+/* Search */
+input[type="search"] {
+    border: 0;
+    background: #fff;
+    height: 35px !important;
+    max-width: 200px;
+    border-radius: 1rem 0 0 1rem;
+    padding-left: 10px;
+    font-size: 1rem;
+}
+
+input:focus, ul:focus, ul:active, ul:focus-visible {
+    outline: none;
+}
+
+#search {
+    background: #dfdfdf;
+    border: 0;
+    height: 35px !important;
+    font-size: 20px;
+    border-radius: 0 1rem 1rem 0;
+}
+
+/* CKEditor */
+.cke_resizer_ltr {
+    display: none !important;
+}
+
+.cke_contents {
+    height: 120px !important;
+}
+
+.cke_bottom {
+    display: none !important;
+}
+
+table.cke_dialog_ui_hbox {
+    display: none;
+}
+
+.cke_dialog_footer_buttons {
+    display: block !important;
+}
+
+.cke_dialog_image_url {
+    display: block !important;
+}
+
+.cke_dialog_tabs {
+    display: none !important;
+}
+
+.cke_dialog_contents {
+    margin-top: 0 !important;
+}
+
+/* Theme */
+.btn-theme, .btn-theme:hover {
+    background: #314453;
+    color: #fff;
+    border-radius: .25rem;
+}

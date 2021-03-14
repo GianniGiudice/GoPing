@@ -1,0 +1,91 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link href="{{ asset('css/home.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+    <div class="top-background"></div>
+    <div class="overlay">
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#"><img src="{{ asset('img/logo.png') }}" alt="Logo"> GoPing</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse ms-3" id="navbarNav">|
+                    <ul class="navbar-nav ms-3">
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="#"><i class="fab fa-facebook-square"></i></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><i class="fab fa-twitter-square"></i></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><i class="fab fa-google-plus-square"></i></a>
+                        </li>
+                    </ul>
+
+                    <ul class="navbar-nav navbar-end ms-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#" data-bs-toggle="modal" data-bs-target="#connection-modal" data-bs-whatever="@fat"><i class="fas fa-user me-1"></i> CONNEXION</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div class="top-content d-flex">
+        <div class="center-content m-auto">
+            <h1>Bienvenue sur GoPing</h1>
+
+            <p style="max-width: 700px;">Rejoignez la communauté, tenez-vous informés des dernières actualités et échangez avec de véritables passionnés du Ping.</p>
+
+            <div class="text-danger fw-bold">
+                {% if error %}
+                    {{ error.messageKey|trans(error.messageData, 'security') }}
+                {% endif %}
+                {{ form_errors(registration_form.email) }}
+                {{ form_errors(registration_form.pseudo) }}
+                {{ form_errors(registration_form.password) }}
+            </div>
+
+            <p class="mt-5">
+                <button class="btn btn-transparent" data-bs-toggle="modal" data-bs-target="#registration-modal" data-bs-whatever="@fat">REJOIGNEZ-NOUS</button>
+            </p>
+        </div>
+    </div>
+
+    <div class="modal fade" id="registration-modal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">INSCRIPTION</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-5">
+                    {{ form_start(registration_form) }}
+                        {{ form_widget(registration_form.pseudo) }}<br>
+                        {{ form_widget(registration_form.email) }}<br>
+                        {{ form_widget(registration_form.password) }}
+                        {{ form_widget(registration_form.save) }}
+                    {{ form_end(registration_form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="connection-modal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Connexion</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-5">
+                    {% include 'security/login.html.twig' %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,36 @@
+h1 {
+    font-size: 2rem;
+    text-align: center;
+}
+
+/* Actuality */
+
+.actuality {
+    padding-top: 100px !important;
+}
+
+/* Feed */
+
+#publication > div:nth-of-type(2) {
+    text-align: right;
+}
+
+.publications .publication {
+    padding: 10px;
+    background: #fff;
+    border-radius: .25rem;
+    margin-bottom: 30px;
+}
+
+.publications .publication .publication-header {
+    margin-bottom: 10px;
+}
+
+img.publication-profile-picture {
+    border-radius: 50% !important;
+}
+
+.publication-content img {
+    max-width: 100%;
+    height: auto !important;
+}

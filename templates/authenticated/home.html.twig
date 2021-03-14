@@ -1,0 +1,54 @@
+{% extends 'authenticated/base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('css/authenticated/home.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3 bg-white">
+                <div class="actuality p-5 sticky-top">
+                    <h1>Actualités</h1>
+                </div>
+            </div>
+
+            <div class="col-md-6 p-5 feed">
+                <div class="publish">
+                    {{ form(form) }}
+                </div>
+
+                <hr>
+
+                <div class="publications">
+                    {% for publication in publications %}
+                        <div class="publication">
+                            <div class="publication-header">
+                                <div class="d-flex">
+                                    <img src="
+                                        {% if publication.author.avatar is not null %}
+                                            {{ asset('img/avatar/' ~ publication.author.avatar) }}
+                                        {% else %}
+                                            {{ asset('img/profile_default.png') }}
+                                        {% endif %}
+                                    " class="publication-profile-picture" width="45" height="45"
+                                    >
+                                    <div class="ps-2">
+                                        <span class="fw-bold">{{ publication.author.pseudo }}</span><br>
+                                        {{ publication.getPublicationDate|ago(locale='fr') }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="publication-content">
+                                {{ publication.content|raw }}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="col-md-3"></div>
+        </div>
+    </div>
+{% endblock %}
