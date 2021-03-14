@@ -125,7 +125,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../e-low/my-website" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../Vitalytech/Atlas" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -138,7 +138,7 @@
       <workItem from="1615578895027" duration="9164000" />
       <workItem from="1615633220975" duration="2068000" />
       <workItem from="1615656047172" duration="10901000" />
-      <workItem from="1615753627126" duration="7861000" />
+      <workItem from="1615753627126" duration="10152000" />
     </task>
     <servers />
   </component>
@@ -146,18 +146,18 @@
     <option name="version" value="3" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="693" y="311" width="524" height="491" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1615656866817">
+    <state x="693" y="311" width="524" height="491" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1615762154872">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state x="693" y="311" width="524" height="491" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1615656866817" />
-    <state x="743" y="311" width="424" height="491" key="FileChooserDialogImpl" timestamp="1615761379761">
+    <state x="693" y="311" width="524" height="491" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1615762154872" />
+    <state x="743" y="311" width="424" height="491" key="FileChooserDialogImpl" timestamp="1615761818009">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state x="743" y="311" width="424" height="491" key="FileChooserDialogImpl/0.27.1920.1053@0.27.1920.1053" timestamp="1615761379761" />
-    <state x="646" y="273" width="721" height="568" key="NewPhpClassDialog" timestamp="1615754748995">
+    <state x="743" y="311" width="424" height="491" key="FileChooserDialogImpl/0.27.1920.1053@0.27.1920.1053" timestamp="1615761818009" />
+    <state x="646" y="273" width="721" height="568" key="NewPhpClassDialog" timestamp="1615762069327">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state x="646" y="273" width="721" height="568" key="NewPhpClassDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1615754748995" />
+    <state x="646" y="273" width="721" height="568" key="NewPhpClassDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1615762069327" />
     <state x="623" y="259" width="672" height="678" key="search.everywhere.popup" timestamp="1615634053907">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
