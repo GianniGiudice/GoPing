@@ -34,3 +34,13 @@ img.publication-profile-picture {
     max-width: 100%;
     height: auto !important;
 }
+
+.publication-content .far, .publication-content .fas {
+    cursor: pointer;
+    color: #314453;
+    font-size: 1.1rem;
+}
+
+.publication-content .reaction-qty {
+    font-size: 0.8rem;
+}

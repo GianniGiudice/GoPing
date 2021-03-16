@@ -7,6 +7,7 @@ namespace App\Controller;
 use App\Entity\Publication;
 use App\Form\Type\Authenticated\PublicationType;
 use App\Repository\PublicationRepository;
+use App\Repository\ReactionRepository;
 use DateTime;
 use DateTimeZone;
 use Doctrine\ORM\EntityManagerInterface;
@@ -29,10 +30,12 @@ class UserHomeManager extends AbstractController
      * @param Request $request
      * @param EntityManagerInterface $entityManager
      * @param PublicationRepository $publicationRepository
+     * @param ReactionRepository $reactionRepository
      * @return Response
      * @throws \Exception
      */
-    public function home(Request $request, EntityManagerInterface $entityManager, PublicationRepository $publicationRepository)
+    public function home(Request $request, EntityManagerInterface $entityManager,
+                         PublicationRepository $publicationRepository, ReactionRepository $reactionRepository)
     {
         $publication = new Publication();
         $form = $this->createForm(PublicationType::class, $publication);
@@ -48,7 +51,8 @@ class UserHomeManager extends AbstractController
         }
         return $this->render('authenticated/home.html.twig', [
             'form' => $form->createView(),
-            'publications' => $publicationRepository->findAll()
+            'publications' => $publicationRepository->findAll(),
+            'reactions' => $reactionRepository->findAll()
         ]);
     }
 }

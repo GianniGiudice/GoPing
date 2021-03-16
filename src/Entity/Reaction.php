@@ -2,15 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\PublicationRepository;
+use App\Repository\ReactionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=PublicationRepository::class)
+ * @ORM\Entity(repositoryClass=ReactionRepository::class)
  */
-class Publication
+class Reaction
 {
     /**
      * @ORM\Id
@@ -20,23 +20,27 @@ class Publication
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="publications")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(type="string", length=20)
      */
-    private $author;
+    private $name;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="string", length=20)
      */
-    private $content;
+    private $label;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="string", length=255)
      */
-    private $publication_date;
+    private $class;
 
     /**
-     * @ORM\OneToMany(targetEntity=PublicationReaction::class, mappedBy="publication")
+     * @ORM\Column(type="string", length=255)
+     */
+    private $class_ok;
+
+    /**
+     * @ORM\OneToMany(targetEntity=PublicationReaction::class, mappedBy="reaction")
      */
     private $publicationReactions;
 
@@ -50,38 +54,50 @@ class Publication
         return $this->id;
     }
 
-    public function getAuthor(): ?User
+    public function getName(): ?string
     {
-        return $this->author;
+        return $this->name;
     }
 
-    public function setAuthor(?User $author): self
+    public function setName(string $name): self
     {
-        $this->author = $author;
+        $this->name = $name;
 
         return $this;
     }
 
-    public function getContent(): ?string
+    public function getLabel(): ?string
     {
-        return $this->content;
+        return $this->label;
     }
 
-    public function setContent(string $content): self
+    public function setLabel(string $label): self
     {
-        $this->content = $content;
+        $this->label = $label;
 
         return $this;
     }
 
-    public function getPublicationDate(): ?\DateTimeInterface
+    public function getClass(): ?string
     {
-        return $this->publication_date;
+        return $this->class;
     }
 
-    public function setPublicationDate(\DateTimeInterface $publication_date): self
+    public function setClass(string $class): self
     {
-        $this->publication_date = $publication_date;
+        $this->class = $class;
+
+        return $this;
+    }
+
+    public function getClassOk(): ?string
+    {
+        return $this->class_ok;
+    }
+
+    public function setClassOk(string $class_ok): self
+    {
+        $this->class_ok = $class_ok;
 
         return $this;
     }
@@ -98,7 +114,7 @@ class Publication
     {
         if (!$this->publicationReactions->contains($publicationReaction)) {
             $this->publicationReactions[] = $publicationReaction;
-            $publicationReaction->setPublication($this);
+            $publicationReaction->setReaction($this);
         }
 
         return $this;
@@ -108,8 +124,8 @@ class Publication
     {
         if ($this->publicationReactions->removeElement($publicationReaction)) {
             // set the owning side to null (unless already changed)
-            if ($publicationReaction->getPublication() === $this) {
-                $publicationReaction->setPublication(null);
+            if ($publicationReaction->getReaction() === $this) {
+                $publicationReaction->setReaction(null);
             }
         }
 

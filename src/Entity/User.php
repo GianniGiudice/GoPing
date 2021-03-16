@@ -83,9 +83,15 @@ class User implements UserInterface
      */
     private $avatar;
 
+    /**
+     * @ORM\OneToMany(targetEntity=PublicationReaction::class, mappedBy="author")
+     */
+    private $publicationReactions;
+
     public function __construct()
     {
         $this->publications = new ArrayCollection();
+        $this->publicationReactions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -250,6 +256,36 @@ class User implements UserInterface
     public function setAvatar(?string $avatar): self
     {
         $this->avatar = $avatar;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|PublicationReaction[]
+     */
+    public function getPublicationReactions(): Collection
+    {
+        return $this->publicationReactions;
+    }
+
+    public function addPublicationReaction(PublicationReaction $publicationReaction): self
+    {
+        if (!$this->publicationReactions->contains($publicationReaction)) {
+            $this->publicationReactions[] = $publicationReaction;
+            $publicationReaction->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removePublicationReaction(PublicationReaction $publicationReaction): self
+    {
+        if ($this->publicationReactions->removeElement($publicationReaction)) {
+            // set the owning side to null (unless already changed)
+            if ($publicationReaction->getAuthor() === $this) {
+                $publicationReaction->setAuthor(null);
+            }
+        }
 
         return $this;
     }

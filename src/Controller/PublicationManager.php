@@ -29,7 +29,7 @@ class PublicationManager extends AbstractController
             $now = new DateTime('now', new \DateTimeZone('Europe/Paris'));
             $data[] = [
                 'id' => $publication->getId(),
-                'ago' => $dateTimeFormatter->formatDiff($publication->getPublicationDate(), $now)
+                'ago' => $dateTimeFormatter->formatDiff($publication->getPublicationDate(), $now, 'fr')
             ];
         }
         return new JsonResponse(json_encode($data), JsonResponse::HTTP_OK);

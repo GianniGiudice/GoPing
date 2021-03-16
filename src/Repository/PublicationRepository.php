@@ -3,7 +3,10 @@
 namespace App\Repository;
 
 use App\Entity\Publication;
+use App\Entity\PublicationReaction;
+use App\Entity\Reaction;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -26,19 +29,33 @@ class PublicationRepository extends ServiceEntityRepository
     // /**
     //  * @return Publication[] Returns an array of Publication objects
     //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @param int $max
+     * @return int|mixed|string
+     */
+    public function getLastPublications($max = 10)
     {
+        /*
+            SELECT p.id, p.author_id, p.content, p.publication_date, COUNT(reaction.id)
+            FROM publication AS p
+            LEFT JOIN publication_reaction ON publication_reaction.publication_id = p.id
+            LEFT JOIN reaction ON publication_reaction.reaction_id = reaction.id
+            GROUP BY p.id, reaction_id
+         */
+
         return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
+            ->select('p.id AS publication_id, IDENTITY(p.author) AS author_id, IDENTITY(pr.author) AS author_reaction_id, p.content, p.publication_date, r.id AS reaction_id, COUNT(r) AS nb_reactions')
+            ->leftJoin(PublicationReaction::class, 'pr', 'WITH', 'pr.publication = p')
+            ->leftJoin(Reaction::class, 'r', 'WITH', 'pr.reaction = r')
+            ->orderBy('p.id', 'DESC')
+            ->groupBy('p')
+            ->addGroupBy('r')
+            ->addGroupBy('pr')
+            ->setMaxResults($max)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
 
     /*
     public function findOneBySomeField($value): ?Publication
