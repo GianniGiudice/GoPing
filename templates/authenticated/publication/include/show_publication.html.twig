@@ -1,0 +1,55 @@
+{% set reacted = false %}
+{% set nb_reactions = [] %}
+{% for reaction in reactions %}
+    {% set value = 0 %}
+    {% for pr in publication.publicationReactions %}
+        {% if pr.reaction.id == reaction.id %}
+            {% if pr.author.id == app.user.id %}
+                {% set reacted = reaction.name %}
+            {% endif %}
+            {% set value = value + 1 %}
+        {% endif %}
+    {% endfor %}
+
+    {% set nb_reactions = nb_reactions|merge({ (reaction.name): value }) %}
+{% endfor %}
+
+<div class="publication" id="publication-{{ publication.id }}">
+    <div class="publication-header">
+        <div class="d-flex">
+            <img src="
+                {% if publication.author.avatar is not null %}
+                    {{ asset('img/avatar/' ~ publication.author.avatar) }}
+                {% else %}
+                    {{ asset('img/profile_default.png') }}
+                {% endif %}
+            " class="publication-profile-picture" width="45" height="45"
+            >
+            <div class="ps-2">
+                <span class="fw-bold">{{ publication.author.pseudo }}</span><br>
+                <span id="{{ publication.id }}">{{ publication.getPublicationDate|ago(locale='fr') }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="publication-content">
+        {{ publication.content|raw }}
+        <div class="pb-4">
+            <hr>
+            <div class="float-start">
+                {% for reaction in reactions %}
+                    <span class="reaction-qty me-3">
+                        <i class="
+                            {% if reacted == reaction.name %}
+                                {{ reaction.classOk }} react-ok
+                            {% else %}
+                                {{ reaction.class }} react
+                            {% endif %} me-1
+                        " title="{{ reaction.label }}"></i>
+                        {{ attribute(nb_reactions, reaction.name) }}
+                    </span>
+                {% endfor %}
+            </div>
+            <div class="float-end fst-italic">Commentaires</div>
+        </div>
+    </div>
+</div>

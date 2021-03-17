@@ -23,48 +23,10 @@
 
                 <div class="publications">
                     {% for publication in publications %}
-                        {% set nb_reactions = [] %}
-                        {% for reaction in reactions  %}
-                            {% set value = 0 %}
-                            {% for pr in publication.publicationReactions %}
-                                {% if pr.reaction.id == reaction.id %}
-                                    {% set value = value + 1 %}
-                                {% endif %}
-                            {% endfor %}
-
-                            {% set nb_reactions = nb_reactions|merge({ (reaction.name): value }) %}
-                        {% endfor %}
-
-                        <div class="publication">
-                            <div class="publication-header">
-                                <div class="d-flex">
-                                    <img src="
-                                        {% if publication.author.avatar is not null %}
-                                            {{ asset('img/avatar/' ~ publication.author.avatar) }}
-                                        {% else %}
-                                            {{ asset('img/profile_default.png') }}
-                                        {% endif %}
-                                    " class="publication-profile-picture" width="45" height="45"
-                                    >
-                                    <div class="ps-2">
-                                        <span class="fw-bold">{{ publication.author.pseudo }}</span><br>
-                                        <span id="{{ publication.id }}">{{ publication.getPublicationDate|ago(locale='fr') }}</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="publication-content">
-                                {{ publication.content|raw }}
-                                <div class="pb-4">
-                                    <hr>
-                                    <div class="float-start">
-                                        {% for reaction in reactions %}
-                                            <span class="reaction-qty me-3"><i class="{{ reaction.class }} me-1" title="{{ reaction.label }}"></i>{{ attribute(nb_reactions, reaction.name) }}</span>
-                                        {% endfor %}
-                                    </div>
-                                    <div class="float-end">Hello</div>
-                                </div>
-                            </div>
-                        </div>
+                        {% include 'authenticated/publication/include/show_publication.html.twig' with {
+                                'reactions': reactions, 'publication': publication
+                            }
+                        %}
                     {% endfor %}
                 </div>
             </div>
@@ -76,6 +38,7 @@
 
 {% block javascripts %}
     <script>
+        {# Mise à jour du "il y a" sur chaque publication #}
         const updateTimeValues = () => {
             fetch(
                 "{{ path('update_time_values') }}",
@@ -92,19 +55,47 @@
                 console.log(err);
             });
         };
-        
-        $(document).ready(function () {
-            setInterval(updateTimeValues, 60 * 1000);
-            $('.far').each(function () {
-               $(this).bind('mouseover', function () {
-                   $(this).removeClass('far');
-                   $(this).addClass('fas');
-               });
+
+        {# Actions liées aux réactions sur les publications #}
+        const react = () => {
+            // On hover reaction
+            $('.react').each(function () {
+                $(this).bind('mouseover', function () {
+                    $(this).removeClass('far');
+                    $(this).addClass('fas');
+                });
+
                 $(this).bind('mouseleave', function () {
                     $(this).removeClass('fas');
                     $(this).addClass('far');
                 });
             });
+
+            $('.react-ok, .react').each(function () {
+                // On click reaction
+                $(this).on('click', function () {
+                    const label = $(this).attr('title');
+                    const already_reacted = $(this).hasClass('react-ok');
+                    const id = $(this).closest('.publication').attr('id').substr(12);
+
+                    $.ajax({
+                        method: "POST",
+                        url: "{{ path('react_to_publication') }}",
+                        data: {label: label, already_reacted: already_reacted, publication_id: id},
+                        success: function (response) {
+                            $('#publication-' + id).replaceWith(response);
+                        },
+                        complete: function () {
+                            react();
+                        }
+                    })
+                });
+            });
+        }
+        
+        $(document).ready(function () {
+            setInterval(updateTimeValues, 60 * 1000)
+            react();
         });
     </script>
 {% endblock %}
