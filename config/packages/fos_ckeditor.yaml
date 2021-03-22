@@ -7,4 +7,4 @@ fos_ck_editor:
     configs:
         main_config:
             toolbar:
-                - { name: "styles", items: ['Bold', 'Italic', 'Underline', 'Blockquote', 'Link', 'Image', 'Table', 'TextColor'] }
+                - { name: "styles", items: ['Bold', 'Italic', 'Underline', 'Link', 'Image', 'TextColor'] }

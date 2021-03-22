@@ -26,7 +26,9 @@
             " class="publication-profile-picture" width="45" height="45"
             >
             <div class="ps-2">
-                <span class="fw-bold">{{ publication.author.pseudo }}</span><br>
+                <a href="{{ path('user_profile', {'id': publication.author.id}) }}">
+                    <span class="fw-bold">{{ publication.author.pseudo }}</span><br>
+                </a>
                 <span id="{{ publication.id }}">{{ publication.getPublicationDate|ago(locale='fr') }}</span>
             </div>
         </div>

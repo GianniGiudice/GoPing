@@ -1,0 +1,36 @@
+{% extends 'authenticated/base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('css/authenticated/profile.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div class="profile">
+                <div class="profile-header">
+                    <div class="profile-username">{{ user.pseudo }}</div>
+                    <div class="profile-avatar" style="
+                            background-image:
+                                {% if user.avatar %}
+                                    url('{{ asset('img/avatar/' ~ user.avatar) }}')
+                                {% else %}
+                                    url('{{ asset('img/profile_default.png') }}')
+                                {% endif %};
+                            background-position: center center;
+                            background-size: cover;
+                            ">
+                    </div>
+                    <div class="profile-avatar-hover"></div>
+                    <div class="cross">+</div>
+                </div>
+                <div class="profile-body"></div>
+            </div>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</div>
+{% endblock %}

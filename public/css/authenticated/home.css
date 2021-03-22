@@ -26,6 +26,15 @@ h1 {
     margin-bottom: 10px;
 }
 
+.publications .publication .publication-header a {
+    text-decoration: none;
+    color: #333333;
+}
+
+.publications .publication .publication-header a:hover {
+    opacity: 0.8;
+}
+
 img.publication-profile-picture {
     border-radius: 50% !important;
 }
@@ -43,4 +52,11 @@ img.publication-profile-picture {
 
 .publication-content .reaction-qty {
     font-size: 0.8rem;
+}
+
+@media (max-width: 992px)
+{
+    .actuality {
+        display: none;
+    }
 }
