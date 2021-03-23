@@ -88,6 +88,11 @@ class User implements UserInterface
      */
     private $publicationReactions;
 
+    /**
+     * @ORM\OneToOne(targetEntity=UserDetails::class, mappedBy="user", cascade={"persist", "remove"})
+     */
+    private $userDetails;
+
     public function __construct()
     {
         $this->publications = new ArrayCollection();
@@ -286,6 +291,23 @@ class User implements UserInterface
                 $publicationReaction->setAuthor(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUserDetails(): ?UserDetails
+    {
+        return $this->userDetails;
+    }
+
+    public function setUserDetails(UserDetails $userDetails): self
+    {
+        // set the owning side of the relation if necessary
+        if ($userDetails->getUser() !== $this) {
+            $userDetails->setUser($this);
+        }
+
+        $this->userDetails = $userDetails;
 
         return $this;
     }
